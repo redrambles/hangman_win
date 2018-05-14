@@ -45,12 +45,16 @@ module Hangman
             break
           end
         else
-          puts "OH NOES! The word doesn't contain '#{char}'"
-          if guess.include? char
-            @wrong_tries = @wrong_tries
+          if !char.match(/^[[:alpha:]]$/) == true # If they did not guess a letter (special character)
+            puts 'This is hangman! We need a letter! What the hell was that?'
           else
-            @wrong_tries = @wrong_tries + 1
-            guess << char
+            puts "OH NOES! The word doesn't contain '#{char}'"
+            if guess.include? char # If they already guessed this wrong letter -don't penalize them again
+              @wrong_tries = @wrong_tries
+            else
+              @wrong_tries = @wrong_tries + 1
+              guess << char
+            end
           end
           if wrong_tries == chances
             puts Graphics::DEAD
