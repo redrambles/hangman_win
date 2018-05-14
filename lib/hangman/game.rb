@@ -21,8 +21,16 @@ module Hangman
 
         if word.include? char
           if guess.include? char
-            puts "You already entered '#{char}'. Yes, it is still correct.. 🙄"
-            puts 'Try again: ' + Graphics.obfuscate_word(word, guess)
+
+            if char == ""
+              puts 'Hello - I need a letter please'
+              puts 'Try again' + Graphics.obfuscate_word(word, guess)
+              placeholder = Graphics.obfuscate_word(word, guess)
+            else  
+              puts "You already entered '#{char}'. Yes, it is still correct.. 🙄"
+              puts 'Try again: ' + Graphics.obfuscate_word(word, guess)
+            end
+            
           else
             guess << char
             placeholder = Graphics.obfuscate_word(word, guess)
