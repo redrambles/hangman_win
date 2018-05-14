@@ -29,8 +29,9 @@ module Hangman
             else  
               puts "You already entered '#{char}'. Yes, it is still correct.. 🙄"
               puts 'Try again: ' + Graphics.obfuscate_word(word, guess)
+
             end
-            
+
           else
             guess << char
             placeholder = Graphics.obfuscate_word(word, guess)
@@ -45,8 +46,12 @@ module Hangman
           end
         else
           puts "OH NOES! The word doesn't contain '#{char}'"
-          @wrong_tries = @wrong_tries + 1
-
+          if guess.include? char
+            @wrong_tries = @wrong_tries
+          else
+            @wrong_tries = @wrong_tries + 1
+            guess << char
+          end
           if wrong_tries == chances
             puts Graphics::DEAD
             puts "\nARRRRGGGGGGGGGGG YOU LOST! 😭  😵  ☠️"
