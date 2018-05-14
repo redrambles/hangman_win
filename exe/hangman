@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
+if (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
+    $stdout.sync = true
+end
+
 require "hangman"
 
 game = Hangman::Game.new
