@@ -12,11 +12,23 @@ module Hangman
 HANG
 
     ALIVE = <<WIN
-
   (•_•)
   <)  )╯
   /   \\
 WIN
+
+
+    ALIVE2 = <<WIN2
+\(•_•)
+ (  (> 
+ /   \\
+WIN2
+
+     ALIVE3 = <<WIN3
+ (•_•)
+ <)  )>  
+ /   \\
+WIN3
 
     OBFUSCATION_CHAR = "👾"
 
