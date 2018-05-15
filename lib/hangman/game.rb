@@ -14,7 +14,16 @@ module Hangman
       puts 'Guess this word: ' + Graphics.obfuscate_word(word, '')
 
       while true
-        print "[#{chances - wrong_tries} chances left]: "
+        print "[#{@chances - wrong_tries} chances left]: "
+
+        # If we get a ^C - let's bail gracefully
+        Signal.trap("SIGINT") {
+          Graphics.clear_screen
+          Graphics.wanna_give_up
+          exit
+        }
+        # Clear out the ARGV input so that gets.chomp works with user input
+        ARGV.clear
 
         char = gets.chomp
         Graphics.clear_screen
@@ -54,10 +63,11 @@ module Hangman
           if !char.match(/^[[:alpha:]]$/) == true # If they did not guess a letter (special character)
             puts 'This is hangman! We need a letter! What the hell was that?'
           else
-            puts "OH NOES! The word doesn't contain '#{char}'"
             if guess.include? char # If they already guessed this wrong letter -don't penalize them again
+              puts "OH NOES! The word STILL doesn't contain '#{char}'"
               @wrong_tries = @wrong_tries
             else
+              puts "OH NOES! The word doesn't contain '#{char}'"
               @wrong_tries = @wrong_tries + 1
               guess << char
             end

@@ -52,5 +52,11 @@ WIN3
 
       obfuscated
     end
+
+    def self.wanna_give_up
+      puts "See you soon! Bye!"
+      sleep 0.5
+    end
+    
   end
 end
